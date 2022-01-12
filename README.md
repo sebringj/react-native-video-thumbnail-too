@@ -11,11 +11,12 @@ npm install react-native-video-thumbnail-too
 ## Usage
 
 ```js
-import { multiply } from "react-native-video-thumbnail-too";
+import { extractThumbnail } from "react-native-video-thumbnail-too";
 
 // ...
 
-const result = await multiply(3, 7);
+// defaults to start at time 0, will respond with thumbnailPath of dimensions matching video
+const thumbnailPath = await extractThumbnail(pathToVideoFile, timeInMilliseconds);
 ```
 
 ## Contributing
