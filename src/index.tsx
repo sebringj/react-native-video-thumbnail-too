@@ -17,6 +17,6 @@ const VideoThumbnailToo = NativeModules.VideoThumbnailToo
       }
     );
 
-export function multiply(a: number, b: number): Promise<number> {
-  return VideoThumbnailToo.multiply(a, b);
+export function extractThumbnail(videoFilePath: string, timeInMilliseconds: number): Promise<string> {
+  return VideoThumbnailToo.extractThumbnail(videoFilePath, timeInMilliseconds);
 }
