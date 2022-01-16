@@ -14,17 +14,7 @@ npx react-native link react-native-video-thumbnail-too
 ```js
 import { extractThumbnail } from "react-native-video-thumbnail-too";
 
-// ...
-
-const resp = await extractThumbnail(pathToVideoFile, timeInMilliseconds);
-/*
-resp is 
-{
-    uri: string,
-    width: number,
-    height: number
-}
-*/
+const { uri, width, height } = await extractThumbnail(pathToVideoFile, timeInMilliseconds);
 ```
 
 ## Contributing
