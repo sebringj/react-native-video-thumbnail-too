@@ -5,7 +5,7 @@ extracts a png thumbnail from a video
 ## Installation
 
 ```sh
-npm install react-native-video-thumbnail-too
+yarn add react-native-video-thumbnail-too
 npx react-native link react-native-video-thumbnail-too
 ```
 
