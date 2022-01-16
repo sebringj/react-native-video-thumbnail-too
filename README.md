@@ -15,8 +15,14 @@ import { extractThumbnail } from "react-native-video-thumbnail-too";
 
 // ...
 
-// defaults to start at time 0, will respond with thumbnailPath of dimensions matching video
-const thumbnailPath = await extractThumbnail(pathToVideoFile, timeInMilliseconds);
+const resp = await extractThumbnail(pathToVideoFile, timeInMilliseconds);
+/*
+return Promise<{
+        uri: string,
+        width: number,
+        height: number
+}>
+*/
 ```
 
 ## Contributing

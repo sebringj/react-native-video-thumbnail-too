@@ -36,8 +36,7 @@ class VideoThumbnailTooModule(reactContext: ReactApplicationContext) : ReactCont
 
         return promise.resolve(file.absoluteFile)
       } catch (e: Exception) {
-        print(e.toString())
-        return promise.resolve("")
+        return promise.reject(e)
       }
     }
 }

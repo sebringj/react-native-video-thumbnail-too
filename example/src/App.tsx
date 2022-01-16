@@ -5,17 +5,14 @@ import { extractThumbnail } from 'react-native-video-thumbnail-too';
 import RNFS from 'react-native-fs'
 
 export default function App() {
-  const [thumbnail, setThumbnail] = useState('')
+  const [thumbnail, setThumbnail] = useState({ width: 0, height: 0, uri: '' })
 
   React.useEffect(() => {
     async function getThumbnail() {
       try {
         const result = (await RNFS.readDir(RNFS.MainBundlePath)).find(o => o.path.endsWith('movie.mp4'))
-        console.log(result)
-        console.log(result!.path)
-        const thumbnailPath = await extractThumbnail(result!.path, 0)
-        console.log(thumbnailPath)
-        setThumbnail(thumbnailPath);
+        const response = await extractThumbnail(result!.path, 0)
+        setThumbnail(response);
       } catch (err) {
         console.log(err)
       }
@@ -25,7 +22,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      {thumbnail ? <Image source={{ uri: thumbnail }} width={100} height={100} /> : <Text>Loading thumbnail...</Text>}
+      {thumbnail.width? <Image source={{ uri: thumbnail.uri }} style={{ width: thumbnail.width, height: thumbnail.height }} /> : <Text>Loading thumbnail...</Text>}
     </View>
   );
 }

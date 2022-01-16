@@ -1,4 +1,4 @@
-import { NativeModules, Platform } from 'react-native';
+import { NativeModules, Platform, Image } from 'react-native';
 
 const LINKING_ERROR =
   `The package 'react-native-video-thumbnail-too' doesn't seem to be linked. Make sure: \n\n` +
@@ -17,6 +17,29 @@ const VideoThumbnailToo = NativeModules.VideoThumbnailToo
       }
     );
 
-export function extractThumbnail(videoFilePath: string, timeInMilliseconds: number): Promise<string> {
-  return VideoThumbnailToo.extractThumbnail(videoFilePath, timeInMilliseconds);
+/**
+ * 
+ * @param videoFilePath 
+ * @param timeInMilliseconds 
+ * @returns
+ */
+export function extractThumbnail(videoFilePath: string, timeInMilliseconds: number): Promise<{
+  width: number;
+  height: number;
+  uri: string;
+}> {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const uri = await VideoThumbnailToo.extractThumbnail(videoFilePath, timeInMilliseconds)
+      Image.getSize(uri, (width, height) => {
+        resolve({
+          width, height, uri
+        })
+      }, err => {
+        reject(err)
+      })
+    } catch (err) {
+      reject(err)
+    }
+  })
 }
