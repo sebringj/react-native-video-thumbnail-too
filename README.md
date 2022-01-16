@@ -17,11 +17,12 @@ import { extractThumbnail } from "react-native-video-thumbnail-too";
 
 const resp = await extractThumbnail(pathToVideoFile, timeInMilliseconds);
 /*
-return Promise<{
-        uri: string,
-        width: number,
-        height: number
-}>
+resp is 
+{
+    uri: string,
+    width: number,
+    height: number
+}
 */
 ```
 
