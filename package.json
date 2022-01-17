@@ -1,6 +1,6 @@
 {
   "name": "react-native-video-thumbnail-too",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "extracts a png thumbnail from a video",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
