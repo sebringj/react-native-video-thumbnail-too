@@ -4,7 +4,7 @@
 
     RCT_EXTERN_METHOD(extractThumbnail:
     (NSString *)videoFilePath
-    withFrameMilliseconds:(NSNumber)frameMilliseconds
+    withFrameMilliseconds:(nonnull NSNumber)frameMilliseconds
     withResolve:(RCTPromiseResolveBlock)resolve
     withReject:(RCTPromiseRejectBlock)reject)
 

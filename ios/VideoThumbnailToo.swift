@@ -4,13 +4,13 @@ import UIKit
 @objc(VideoThumbnailToo)
 class VideoThumbnailToo: NSObject {
     @objc(extractThumbnail:withFrameMilliseconds:withResolve:withReject:)
-    func extractThumbnail(_ videoFilePath:String, frameMilliseconds:Int64 = 0, resolve:RCTPromiseResolveBlock, reject:RCTPromiseRejectBlock) -> Void {
+    func extractThumbnail(_ videoFilePath:String, nonnull frameMilliseconds: NSNumber, resolve:RCTPromiseResolveBlock, reject:RCTPromiseRejectBlock) -> Void {
         let url = URL(fileURLWithPath: videoFilePath)
         do {
             let asset = AVURLAsset(url: url, options: nil)
             let imgGenerator = AVAssetImageGenerator(asset: asset)
             imgGenerator.appliesPreferredTrackTransform = true
-            let thumbnailTime = CMTimeMake(value: 0, timescale: 1000)
+            let thumbnailTime = CMTimeMake(value: frameMilliseconds.int64Value, timescale: 1000)
             let cgImage = try? imgGenerator.copyCGImage(at: thumbnailTime, actualTime: nil)
             let thumbnail = UIImage(cgImage: cgImage.unsafelyUnwrapped)
             let data = thumbnail.pngData()
@@ -32,5 +32,3 @@ func getDocumentsDirectory() -> URL {
 func timeStamp() -> String {
     return String(describing: NSDate().timeIntervalSince1970)
 }
-
-
