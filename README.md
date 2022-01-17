@@ -17,6 +17,14 @@ import { extractThumbnail } from "react-native-video-thumbnail-too";
 const { uri, width, height } = await extractThumbnail(pathToVideoFile, timeInMilliseconds);
 ```
 
+## Need anything custom?
+
+https://www.jasonsebring.com/contact
+
+## Tip Jar
+
+https://www.jasonsebring.com/pay
+
 ## Contributing
 
 See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
@@ -24,7 +32,3 @@ See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the 
 ## License
 
 MIT
-
-## Need anything custom?
-
-https://www.jasonsebring.com/contact
