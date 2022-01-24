@@ -10,7 +10,10 @@ export default function App() {
   React.useEffect(() => {
     async function getThumbnail() {
       try {
-        const result = (await RNFS.readDir(RNFS.MainBundlePath)).find(o => o.path.endsWith('movie.mp4'))
+        console.log("android.resource://./")
+        const dir = await RNFS.readFileAssets('./raw/movie.mp4')
+        console.log(dir)
+        const result = (await RNFS.readDir(RNFS.ExternalStorageDirectoryPath)).find(o => o.path.endsWith('movie.mp4'))
         const response = await extractThumbnail(result!.path, 0)
         setThumbnail(response);
       } catch (err) {
@@ -22,6 +25,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+      <Text>Test</Text>
       {thumbnail.width? <Image source={{ uri: thumbnail.uri }} style={{ width: thumbnail.width, height: thumbnail.height }} /> : <Text>Loading thumbnail...</Text>}
     </View>
   );

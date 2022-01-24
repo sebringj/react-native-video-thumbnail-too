@@ -11,15 +11,16 @@ class VideoThumbnailToo: NSObject {
             let imgGenerator = AVAssetImageGenerator(asset: asset)
             imgGenerator.appliesPreferredTrackTransform = true
             let thumbnailTime = CMTimeMake(value: frameMilliseconds.int64Value, timescale: 1000)
-            let cgImage = try? imgGenerator.copyCGImage(at: thumbnailTime, actualTime: nil)
-            let thumbnail = UIImage(cgImage: cgImage.unsafelyUnwrapped)
+            let cgImage = try imgGenerator.copyCGImage(at: thumbnailTime, actualTime: nil)
+            let thumbnail = UIImage(cgImage: cgImage)
             let data = thumbnail.pngData()
             let filepath = getDocumentsDirectory()
-                .appendingPathComponent("react-native-video-thumbnail-" + timeStamp() + ".png").standardizedFileURL
-            try data.unsafelyUnwrapped.write(to: filepath)
+                .appendingPathComponent("react-native-video-thumbnail-" + timeStamp() + ".png")
+            try data.unsafelyUnwrapped.write(to: filepath, options: .atomic)
             resolve(String(describing: filepath))
-        } catch let error {
-            reject("extractThumbnail", "cannot load url", error)
+        } catch {
+            print("extractThumbnail \(error)")
+            reject("extractThumbnail", "could not load url", error)
         }
     }
 }
