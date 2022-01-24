@@ -8,6 +8,10 @@ extracts a jpg thumbnail from a video
 yarn add react-native-video-thumbnail-too
 npx react-native link react-native-video-thumbnail-too
 ```
+### IOS
+```sh
+cd ios && pod install
+```
 
 ## Usage
 
