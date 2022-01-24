@@ -1,6 +1,6 @@
 # react-native-video-thumbnail-too
 
-extracts a png thumbnail from a video
+extracts a jpg thumbnail from a video
 
 ## Installation
 
@@ -14,7 +14,11 @@ npx react-native link react-native-video-thumbnail-too
 ```js
 import { extractThumbnail } from "react-native-video-thumbnail-too";
 
-const { uri, width, height } = await extractThumbnail(pathToVideoFile, timeInMilliseconds);
+const { uri, width, height } = await extractThumbnail(
+    pathToVideoFile,
+    timeInMilliseconds, // default 0
+    quality // default 100
+);
 ```
 
 ## Need anything custom?

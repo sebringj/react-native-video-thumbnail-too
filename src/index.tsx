@@ -23,14 +23,14 @@ const VideoThumbnailToo = NativeModules.VideoThumbnailToo
  * @param timeInMilliseconds 
  * @returns
  */
-export function extractThumbnail(videoFilePath: string, timeInMilliseconds: number): Promise<{
+export function extractThumbnail(videoFilePath: string, timeInMilliseconds: number = 0, quality: number = 100): Promise<{
   width: number;
   height: number;
   uri: string;
 }> {
   return new Promise(async (resolve, reject) => {
     try {
-      const uri = await VideoThumbnailToo.extractThumbnail(videoFilePath, timeInMilliseconds)
+      const uri = await VideoThumbnailToo.extractThumbnail(videoFilePath, timeInMilliseconds, quality)
       Image.getSize(uri, (width, height) => {
         resolve({
           width, height, uri
