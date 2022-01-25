@@ -13,6 +13,11 @@ npx react-native link react-native-video-thumbnail-too
 cd ios && pod install
 ```
 
+### Adroid
+```sh
+# already done
+```
+
 ## Usage
 
 ```js
