@@ -1,6 +1,6 @@
 # react-native-video-thumbnail-too
 
-extracts a jpg thumbnail from a video
+extracts a png OR jpg thumbnail from a video
 
 ## Installation
 
@@ -18,11 +18,12 @@ cd ios && pod install
 ```js
 import { extractThumbnail } from "react-native-video-thumbnail-too";
 
-const { uri, width, height } = await extractThumbnail(
-    pathToVideoFile,
-    timeInMilliseconds, // default 0
-    quality // default 100
-);
+const { uri, width, height } = await extractThumbnail({
+    pathToVideoFile, // required
+    timeInMilliseconds, // optional, default: 0
+    imageType, // optional, default: 'jpg', can be 'jpg' or 'png'
+    quality // optional, default: 100, only applies to 'jpg'
+});
 ```
 
 ## Need anything custom?

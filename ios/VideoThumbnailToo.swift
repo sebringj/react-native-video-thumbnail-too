@@ -3,10 +3,13 @@ import UIKit
 
 @objc(VideoThumbnailToo)
 class VideoThumbnailToo: NSObject {
-    @objc(extractThumbnail:withFrameMilliseconds:withQuality:withResolve:withReject:)
-    func extractThumbnail(_ videoFilePath:String, nonnull frameMilliseconds: NSNumber,
+    @objc(extractThumbnail:withFrameMilliseconds:withImageType:withQuality:withResolve:withReject:)
+    func extractThumbnail(_ videoFilePath:String,
+                          nonnull frameMilliseconds: NSNumber,
+                          nonnull imageType: String,
                           nonnull quality: NSNumber,
-                          resolve:RCTPromiseResolveBlock, reject:RCTPromiseRejectBlock) -> Void {
+                          resolve:RCTPromiseResolveBlock,
+                          reject:RCTPromiseRejectBlock) -> Void {
         let url = URL(fileURLWithPath: videoFilePath)
         do {
             let asset = AVURLAsset(url: url, options: nil)
@@ -15,9 +18,9 @@ class VideoThumbnailToo: NSObject {
             let thumbnailTime = CMTimeMake(value: frameMilliseconds.int64Value, timescale: 1000)
             let cgImage = try imgGenerator.copyCGImage(at: thumbnailTime, actualTime: nil)
             let thumbnail = UIImage(cgImage: cgImage)
-            let data = thumbnail.jpegData(compressionQuality: CGFloat(quality.floatValue))
+            let data = imageType == "jpg" ? thumbnail.jpegData(compressionQuality: CGFloat(quality.floatValue / 100)) : thumbnail.pngData()
             let filepath = getDocumentsDirectory()
-                .appendingPathComponent("react-native-video-thumbnail-" + timeStamp() + ".jpg")
+                .appendingPathComponent("react-native-video-thumbnail-" + timeStamp() + "." + imageType)
             try data.unsafelyUnwrapped.write(to: filepath, options: .atomic)
             resolve(String(describing: filepath))
         } catch {

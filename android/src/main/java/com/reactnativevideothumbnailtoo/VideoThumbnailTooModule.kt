@@ -18,7 +18,12 @@ class VideoThumbnailTooModule(reactContext: ReactApplicationContext) : ReactCont
     }
 
     @ReactMethod
-    fun extractThumbnail(videoFilePath: String, frameMilliseconds: Long = 0, quality: Int = 100, promise: Promise) {
+    fun extractThumbnail(
+      videoFilePath: String,
+      frameMilliseconds: Long = 0,
+      imageType: String = "jpg",
+      quality: Int = 100,
+      promise: Promise) {
       try {
         var cleanedVideoFilePath = videoFilePath.replace("file://", "")
         val retriever = MediaMetadataRetriever()
@@ -27,10 +32,14 @@ class VideoThumbnailTooModule(reactContext: ReactApplicationContext) : ReactCont
         var externalDir = this.reactApplicationContext.getExternalFilesDir(null)
         var file = File(
           externalDir.toString(),
-          "react-video-thumbnail-too" + LocalDateTime.now().toString() + ".jpg"
+          "react-video-thumbnail-too" + LocalDateTime.now().toString() + "." + imageType
         )
         val stream: OutputStream = FileOutputStream(file)
-        image.compress(Bitmap.CompressFormat.JPEG, quality, stream)
+        if (imageType == "jpg") {
+          image.compress(Bitmap.CompressFormat.JPEG, quality, stream)
+        } else {
+          image.compress(Bitmap.CompressFormat.PNG, quality, stream)
+        }
         stream.flush()
         stream.close()
 
