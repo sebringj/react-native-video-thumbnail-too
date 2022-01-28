@@ -32,13 +32,13 @@ class VideoThumbnailTooModule(reactContext: ReactApplicationContext) : ReactCont
         var externalDir = this.reactApplicationContext.getExternalFilesDir(null)
         var file = File(
           externalDir.toString(),
-          "react-video-thumbnail-too" + LocalDateTime.now().toString() + "." + imageType
+          "react-video-thumbnail-too-" + LocalDateTime.now().toString() + "." + imageType
         )
         val stream: OutputStream = FileOutputStream(file)
         if (imageType == "jpg") {
-          image.compress(Bitmap.CompressFormat.JPEG, quality, stream)
+          image?.compress(Bitmap.CompressFormat.JPEG, quality, stream)
         } else {
-          image.compress(Bitmap.CompressFormat.PNG, quality, stream)
+          image?.compress(Bitmap.CompressFormat.PNG, quality, stream)
         }
         stream.flush()
         stream.close()
